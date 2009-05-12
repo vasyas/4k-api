@@ -53,7 +53,7 @@ API сервиса www.4konverta.com построено на основе при
 }}}
 
 *URL*: /data/{user}/envelope/{date} <br>
-Доступные действия: GET <br>
+Доступные действия: GET, POST <br>
 Результат: 
 {{{
 <envelope>
@@ -73,8 +73,4 @@ API сервиса www.4konverta.com построено на основе при
   </dailyExpenses>
 </envelope>
 }}}
-
-*URL*: /data/{user}/envelope/{date}/{envelopeDay}/{personId} <br>
-Доступные действия: POST <br>
-Результат - такой же, как и в /data/{user}/envelope/{date}. <br>
-При POST в теле запроса отсылается только выражение в параметре expression, напр., expression=150 кафе, 20 еда (URL-encoded UTF-8, конечно)
+POST служит для задания ежедневных трат. При этом в теле запроса отсылаются envelopeDate, personId и expression, например, <br> envelopeDay=0&personId=23443234&expression=150 кафе, 20 еда (URL-encoded UTF-8, конечно)

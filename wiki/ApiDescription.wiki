@@ -61,6 +61,15 @@ API сервиса www.4konverta.com построено на основе при
   <daily>143.5</daily>
   <spent>21</spent>
   <left>984</left>
+
+  <dailyExpenses>
+    <dailyExpense>
+      <day>0</day>
+      <person>Петя</person>
+      <expression>150 кафе, 20 еда</expression>
+      <sum>170.0</sum>
+    </dailyExpense>
+  </dailyExpenses>
 </envelope>
 }}}
 
@@ -70,7 +79,9 @@ API сервиса www.4konverta.com построено на основе при
 {{{
 <dailyExpense>
   <expression>150 кафе, 20 еда</expression>
-  <result>170.0</result>
+  <sum>170.0</sum>
+  <daily>143.5</daily>
+  <left>-26.5</left> <!-- Бюджет на день - траты всех пользователей в этот день -->
 </dailyExpense>
 }}}
-При POST нужно заполнять только expression.
+При POST в теле запроса отсылается только выражение в параметре expression, напр., expression=150 кафе, 20 еда

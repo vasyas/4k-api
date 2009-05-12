@@ -64,7 +64,7 @@ API сервиса www.4konverta.com построено на основе при
   <left>984</left>
 
   <dailyExpenses>
-    <dailyExpense>
+    <dailyExpense> <!-- Для всех дней и всех пользователей -->
       <day>0</day>
       <personId>23443234</personId>
       <expression>150 кафе, 20 еда</expression>

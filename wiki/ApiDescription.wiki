@@ -9,7 +9,7 @@ API сервиса www.4konverta.com построено на основе при
 || Название || Описание ||
 || user || Логин пользователя ||
 || date || Дата в формате yyyy-MM-dd ||
-|| person || Имя члена семьи, возвращается в /data/{user} ||
+|| personId || Идентификатор члена семьи, возвращается в /data/{user} ||
 || envelopeDay || День недели относительно начала конверта, 0 - первый день, 1 - второй ||
 
 <br>
@@ -44,6 +44,7 @@ API сервиса www.4konverta.com построено на основе при
 
   <persons>
     <person>
+      <id>23443234</id>
       <name>Петя</name>
     </person>
     <person>...</person>
@@ -65,7 +66,7 @@ API сервиса www.4konverta.com построено на основе при
   <dailyExpenses>
     <dailyExpense>
       <day>0</day>
-      <person>Петя</person>
+      <personId>23443234</personId>
       <expression>150 кафе, 20 еда</expression>
       <sum>170.0</sum>
     </dailyExpense>
@@ -73,7 +74,7 @@ API сервиса www.4konverta.com построено на основе при
 </envelope>
 }}}
 
-*URL*: /data/{user}/envelope/{date}/{envelopeDay}/{person} <br>
+*URL*: /data/{user}/envelope/{date}/{envelopeDay}/{personId} <br>
 Доступные действия: GET, POST <br>
 Результат:
 {{{

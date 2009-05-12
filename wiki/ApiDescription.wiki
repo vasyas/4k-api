@@ -37,6 +37,8 @@ API сервиса www.4konverta.com построено на основе при
   <country>Великобритания</country>
   <currencyLongName>фунт стерлингов</currencyLongName>
   <currency>фунт</currency>
+  <countryCode>gb</country>
+  <currencyCode>GBP</currencyCode>
   <firstDayOfWeek>1</firstDayOfWeek> <!-- 0 - sunday, 1 - monday -->
   <timeZone>Europe/London</timeZone>
 

@@ -59,7 +59,6 @@ API сервиса www.4konverta.com построено на основе при
 <envelope>
   <date>yyyy-MM-dd</date>
   <size>1005</size>
-  <daily>143.5</daily>
   <spent>21</spent>
   <left>984</left>
 

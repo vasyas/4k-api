@@ -23,7 +23,8 @@ API сервиса www.4konverta.com построено на основе при
 = Описание API =
 
 *URL*: /data/{user} <br>
-*Результат*: 
+Доступные действия: GET <br>
+Результат: 
 {{{
 <user>
   <country>Великобритания</country>
@@ -42,7 +43,8 @@ API сервиса www.4konverta.com построено на основе при
 }}}
 
 *URL*: /data/{user}/envelope/{date} <br>
-*Результат*: 
+Доступные действия: GET <br>
+Результат: 
 {{{
 <envelope>
   <date>yyyy-MM-dd</date>
@@ -53,9 +55,13 @@ API сервиса www.4konverta.com построено на основе при
 </envelope>
 }}}
 
-*URL*: /data/{user}/envelope/{date}/{person}/{envelopeDay} <br>
-*Результат*:
+*URL*: /data/{user}/envelope/{date}/{envelopeDay}/{person} <br>
+Доступные действия: GET, POST <br>
+Результат:
 {{{
 <dailyExpense>
+  <expression>150 кафе, 20 еда</expression>
+  <result>170.0</result>
 </dailyExpense>
 }}}
+При POST нужно заполнять только expression

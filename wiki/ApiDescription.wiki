@@ -7,8 +7,55 @@ API сервиса www.4konverta.com построено на основе при
 В описании в фигурных скобках описаны параметры, которые нужно подставлять в адреса. 
 Возможны следующие параметры:
 || Название || Описание ||
+|| user || Логин пользователя ||
+|| date || Дата в формате yyyy-MM-dd ||
+|| person || Имя члена семьи, возвращается в /data/{user} ||
+|| envelopeDay || День недели относительно начала конверта, 0 - первый день, 1 - второй ||
 
+<br>
+= Авторизация =
 
+Для авторизации с каждым запросом нужно передавать два заголовка.
+|| 4KApplication || Идентификатор стороннего приложения. <br> Раздаем авторами сервиса "4 конверта"  ||
+|| 4KAuth || Пароль пользователя ||
+
+<br>
 = Описание API =
 
-*URL* /data/{user} *
+*URL*: /data/{user} <br>
+*Результат*: 
+{{{
+<user>
+  <country>Великобритания</country>
+  <currencyLongName>фунт стерлингов</currencyLongName>
+  <currency>фунт</currency>
+  <firstDayOfWeek>1</firstDayOfWeek> <!-- 0 - sunday, 1 - monday -->
+  <timeZone>Europe/London</timeZone>
+
+  <persons>
+    <person>
+      <name>Петя</name>
+    </person>
+    <person>...</person>
+  </persons>
+</user>
+}}}
+
+*URL*: /data/{user}/envelope/{date} <br>
+*Результат*: 
+{{{
+<envelope>
+  <date>yyyy-MM-dd</date>
+  <size>1005</size>
+  <daily>143.5</daily>
+  <spent>21</spent>
+  <left>984</left>
+</envelope>
+}}}
+
+*URL*: /data/{user}/envelope/{date}/{person}/{envelopeDay} <br>
+*Результат*:
+{{{
+<dailyExpense>
+</dailyExpense>
+}}}

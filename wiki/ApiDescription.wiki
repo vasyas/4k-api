@@ -60,7 +60,6 @@ API сервиса www.4konverta.com построено на основе при
   <date>yyyy-MM-dd</date>
   <size>1005</size>
   <spent>21</spent>
-  <left>984</left>
 
   <dailyExpenses>
     <dailyExpense> <!-- Для всех дней и всех пользователей -->

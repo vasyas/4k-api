@@ -69,4 +69,4 @@ API сервиса www.4konverta.com построено на основе при
   <result>170.0</result>
 </dailyExpense>
 }}}
-При POST нужно заполнять только expression
+При POST нужно заполнять только expression.

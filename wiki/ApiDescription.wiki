@@ -10,7 +10,7 @@ API сервиса www.4konverta.com построено на основе при
 || user || Логин пользователя ||
 || date || Дата в формате yyyy-MM-dd ||
 || personId || Идентификатор члена семьи, возвращается в /data/{user} ||
-|| envelopeDay || День недели относительно начала конверта, 0 - первый день, 1 - второй ||
+|| envelopeBegin || Дата начала недели. Если на указанной дате неделя не начинается, буде выбран конверт, в который входит указанная дата. ||
 
 <br>
 = Авторизация =
@@ -43,32 +43,36 @@ API сервиса www.4konverta.com построено на основе при
   <timeZone>Europe/London</timeZone>
 
   <persons>
-    <person>
-      <id>23443234</id>
-      <name>Петя</name>
-    </person>
+    <person id="23443234" name="Петя"/>
     <person>...</person>
   </persons>
 </user>
 }}}
 
-*URL*: /data/{user}/envelope/{date} <br>
-  date должна быть правильным началом недели для пользователя
-Доступные действия: GET, POST <br>
+*URL*: /data/{user}/envelope/{envelopeBegin} <br>
+Доступные действия: GET <br>
 Результат: 
 {{{
-<envelope>
-  <date>yyyy-MM-dd</date>
-  <size>1005</size>
-
-  <dailyExpenses>
-    <dailyExpense> <!-- Для всех дней и всех пользователей -->
-      <day>0</day>
-      <personId>23443234</personId>
+<envelope begin="yyyy-MM-dd" size="1005.0">
+  <person id="23443234" name="Петя">
+    <dailyExpense date="yyyy-MM-dd">
       <expression>150 кафе, 20 еда</expression>
       <sum>170.0</sum>
     </dailyExpense>
-  </dailyExpenses>
+    ...
+  </person>
+  ...
 </envelope>
 }}}
-POST служит для задания ежедневных трат. При этом в теле запроса отсылаются envelopeDate, personId и expression, например, <br> envelopeDay=0&personId=23443234&expression=150 кафе, 20 еда (URL-encoded UTF-8, конечно)
+
+*URL*: /data/{user}/dailyExpense/{personId}/{date} <br>
+Доступные действия: GET, POST <br>
+Результат: 
+{{{
+<dailyExpense date="yyyy-MM-dd">
+  <expression>150 кафе, 20 еда</expression>
+  <sum>170.0</sum>
+</dailyExpense>
+}}}
+
+POST служит для задания ежедневных трат. При этом в теле запроса отсылается выражение для траты, например, <br> expression=150 кафе, 20 еда (URL-encoded UTF-8)

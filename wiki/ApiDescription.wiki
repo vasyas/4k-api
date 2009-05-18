@@ -2,7 +2,11 @@
 
 = Обзор =
 
-API сервиса www.4konverta.com построено на основе принципов REST. На этой страничке я привел адреса страниц API и какие операции с ними возможно. 
+API сервиса www.4konverta.com построено на основе принципов REST. На этой страничке я привел адреса страниц API и какие операции с ними возможны. 
+
+В общем, в ответе на POST и GET запросы возвращается документ в формате XML. Данные на сервер передаются в виде параметров в POST-запросах. Тело POST-запроса при этом пустое.
+
+Считается, что все входные данные синтаксически верные. В случае ошибки сервер возвращает код статуса 500, тело ответа при этом неопределенное.
 
 Комментарии и вопрос писать в форуме "4-х конвертов" по адресу
 http://www.4konverta.com/forum/forums/show/10.page
@@ -31,8 +35,10 @@ http://www.4konverta.com/forum/forums/show/10.page
 
 <br>
 = Описание API =
+=== 1. Общие функции ===
 
-*URL*: /data/{user} <br>
+*1.1. Получение информации о пользователе* <br>
+URL: /data/{user} <br>
 Доступные действия: GET <br>
 Результат: 
 {{{
@@ -52,13 +58,17 @@ http://www.4konverta.com/forum/forums/show/10.page
 </user>
 }}}
 
-*URL*: /data/{user}/envelope/{envelopeBegin} <br>
+=== 2. Ежедневные траты из конвертов ===
+
+*2.1. Информация о недельном конверте* <br>
+URL: /data/{user}/envelope/{envelopeBegin} <br>
 Доступные действия: GET <br>
 Результат: 
 {{{
-<envelope begin="yyyy-MM-dd" size="1005.0">
+<envelope begin="2009-05-18" size="1005.0">
+  ...
   <person id="23443234" name="Петя">
-    <dailyExpense date="yyyy-MM-dd">
+    <dailyExpense date="2009-05-20">
       <expression>150 кафе, 20 еда</expression> <!-- Если expression - пустой, трата не введена -->
       <sum>170.0</sum>
     </dailyExpense>
@@ -68,14 +78,101 @@ http://www.4konverta.com/forum/forums/show/10.page
 </envelope>
 }}}
 
-*URL*: /data/{user}/dailyExpense/{personId}/{date} <br>
+*2.2. Получение и внесение ежедневных трат* <br>
+URL: /data/{user}/dailyExpense/{personId}/{date} <br>
 Доступные действия: GET, POST <br>
 Результат: 
 {{{
-<dailyExpense date="yyyy-MM-dd">
+<dailyExpense date="2009-05-20">
   <expression>150 кафе, 20 еда</expression> <!-- Если expression - пустой, трата не введена -->
   <sum>170.0</sum>
 </dailyExpense>
 }}}
+Параметры POST (URL-encoded UTF-8): <br>
+{{{
+expression=150%20кафе,%2020%20еда
+}}}
 
-POST служит для задания ежедневных трат. При этом в теле запроса отсылается выражение для траты, например, <br> expression=150 кафе, 20 еда (URL-encoded UTF-8)
+=== 3. Выполнение плана (траты, доходы, цели) ===
+
+*3.1. Перечень пунктов для выполнения на выбранной неделе* <br>
+URL: /data/{user}/execution/{envelopeBegin} <br>
+Доступные действия: GET <br>
+Результат: 
+{{{
+<execution begin="2009-05-18" weekRemaining="1250.0" currentRemaining="950.0">
+  <!-- Планируемая и фактическая дата зачисления -->
+  <actualGoalCredit actualDate="2009-05-22" plannedDate="2009-05-20">
+    <goal id="234234" name="(Первоначальный взнос) Авто"/>
+    <planned>1000.0</planned>
+    <actual>950.0</actual>
+  </actualGoalCredit>
+  <actualGoalCredit actualDate="2009-05-23" plannedDate="2009-05-01">
+    <goal id="234234" name="(Другое) Шкаф"/>
+    <planned>1000.0</planned>
+    <actual></actual> <!-- Сумма еще не внесена -->
+  </actualGoalCredit>
+  <actualIncome actualDate="2009-05-18" plannedDate="20095-05-18">
+    <income id="3341123" name="Зарплата"/>
+    <planned>16000.0</planned>
+    <actual>15500.0</actual>
+  </actualIncome>
+  <actualExpense actualDate="2009-05-18" plannedDate="20095-05-18">
+    <expense id="44324553" name="Арендная плата"/>
+    <planned>3000</planned>
+    <actual></actual>
+  </actualExpense>
+  ...
+  <envelope begin="2009-05-18" size="1005.0"> <!-- Такой же, как в п.2.1 -->
+    ...
+  </envelope>
+</execution>
+}}}
+
+*3.2. Зачисление на цель* <br>
+URL: /data/{user}/actualGoalCredit/{goalId}/{plannedDate} <br>
+Доступные действия: GET, POST <br>
+Результат: 
+{{{
+<actualGoalCredit actualDate="2009-05-22" plannedDate="2009-05-20">
+  <goal id="234234" name="(Первоначальный взнос) Авто"/>
+  <planned>1000.0</planned>
+  <actual>950.0</actual>
+</actualGoalCredit>
+}}}
+Параметры POST:
+{{{
+actual=950.0
+}}}
+
+*3.3. Получение дохода* <br>
+URL: /data/{user}/actualIncome/{incomeId}/{plannedDate} <br>
+Доступные действия: GET, POST <br>
+Результат: 
+{{{
+<actualIncome actualDate="2009-05-18" plannedDate="20095-05-18">
+  <income id="3341123" name="Зарплата"/>
+  <planned>16000.0</planned>
+  <actual>15500.0</actual>
+</actualIncome>
+}}}
+Параметры POST:
+{{{
+actual=1500.0
+}}}
+
+*3.3. Выполнение траты* <br>
+URL: /data/{user}/actualExpense/{expenseId}/{plannedDate} <br>
+Доступные действия: GET, POST <br>
+Результат: 
+{{{
+<actualExpense actualDate="2009-05-18" plannedDate="20095-05-18">
+  <expense id="44324553" name="Арендная плата"/>
+  <planned>3000</planned>
+  <actual></actual>
+</actualExpense>
+}}}
+Параметры POST:
+{{{
+actual=1500.0
+}}}

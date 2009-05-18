@@ -59,7 +59,7 @@ http://www.4konverta.com/forum/forums/show/10.page
 <envelope begin="yyyy-MM-dd" size="1005.0">
   <person id="23443234" name="Петя">
     <dailyExpense date="yyyy-MM-dd">
-      <expression>150 кафе, 20 еда</expression>
+      <expression>150 кафе, 20 еда</expression> <!-- Если expression - пустой, трата не введена -->
       <sum>170.0</sum>
     </dailyExpense>
     ...
@@ -73,7 +73,7 @@ http://www.4konverta.com/forum/forums/show/10.page
 Результат: 
 {{{
 <dailyExpense date="yyyy-MM-dd">
-  <expression>150 кафе, 20 еда</expression>
+  <expression>150 кафе, 20 еда</expression> <!-- Если expression - пустой, трата не введена -->
   <sum>170.0</sum>
 </dailyExpense>
 }}}

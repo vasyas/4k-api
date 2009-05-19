@@ -98,7 +98,14 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
 Результат: 
 {{{
 <execution begin="2009-05-18" remaining="950.0"> <!-- Текущий остаток, не зависит от начала недели -->
-  <!-- Планируемая и фактическая дата зачисления -->
+  <!-- Планируемая и фактическая дата получаемого дохода -->
+  <actualIncome actualDate="2009-05-18" plannedDate="2009-05-18">
+    <income id="3341123" name="Зарплата">
+      <currency code="RUR">руб</currency>
+    </income>
+    <planned>16000.0</planned>
+    <actual>15500.0</actual>
+  </actualIncome>
   <actualGoalCredit actualDate="2009-05-22" plannedDate="2009-05-20">
     <goal id="234234" name="(Первоначальный взнос) Авто">
       <currency code="USD">дол</currency>
@@ -113,14 +120,7 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
     <planned>1000.0</planned>
     <actual></actual> <!-- Сумма еще не внесена -->
   </actualGoalCredit>
-  <actualIncome actualDate="2009-05-18" plannedDate="20095-05-18">
-    <income id="3341123" name="Зарплата">
-      <currency code="RUR">руб</currency>
-    </income>
-    <planned>16000.0</planned>
-    <actual>15500.0</actual>
-  </actualIncome>
-  <actualExpense actualDate="2009-05-18" plannedDate="20095-05-18">
+  <actualExpense actualDate="2009-05-18" plannedDate="2009-05-18">
     <expense id="44324553" name="Арендная плата">
       <currency code="RUR">руб</currency>
     </expense>
@@ -134,7 +134,29 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
 </execution>
 }}}
 
-*3.2. Зачисление на цель* <br>
+*3.2. Получение дохода* <br>
+URL: /data/{user}/actualIncome/{incomeId}/{plannedDate} <br>
+Доступные действия: GET, POST <br>
+Результат: 
+{{{
+<actualIncome actualDate="2009-05-18" plannedDate="2009-05-18">
+  <income id="3341123" name="Зарплата">
+    <currency code="RUR">руб</currency>
+  </income>
+  <planned>16000.0</planned>
+  <actual>15500.0</actual>
+</actualIncome>
+}}}
+Параметры POST:
+{{{
+actual=1500.0
+}}}
+или
+{{{
+date=2009-05-20
+}}}
+
+*3.3. Зачисление на цель* <br>
 URL: /data/{user}/actualGoalCredit/{goalId}/{plannedDate} <br>
 Доступные действия: GET, POST <br>
 Результат: 
@@ -151,31 +173,18 @@ URL: /data/{user}/actualGoalCredit/{goalId}/{plannedDate} <br>
 {{{
 actual=950.0
 }}}
-
-*3.3. Получение дохода* <br>
-URL: /data/{user}/actualIncome/{incomeId}/{plannedDate} <br>
-Доступные действия: GET, POST <br>
-Результат: 
+или
 {{{
-<actualIncome actualDate="2009-05-18" plannedDate="20095-05-18">
-  <income id="3341123" name="Зарплата">
-    <currency code="RUR">руб</currency>
-  </income>
-  <planned>16000.0</planned>
-  <actual>15500.0</actual>
-</actualIncome>
-}}}
-Параметры POST:
-{{{
-actual=1500.0
+date=2009-05-20
 }}}
 
-*3.3. Выполнение траты* <br>
+
+*3.4. Выполнение траты* <br>
 URL: /data/{user}/actualExpense/{expenseId}/{plannedDate} <br>
 Доступные действия: GET, POST <br>
 Результат: 
 {{{
-<actualExpense actualDate="2009-05-18" plannedDate="20095-05-18">
+<actualExpense actualDate="2009-05-18" plannedDate="2009-05-18">
   <expense id="44324553" name="Арендная плата">
     <currency code="RUR">руб</currency>
   </expense>
@@ -185,5 +194,9 @@ URL: /data/{user}/actualExpense/{expenseId}/{plannedDate} <br>
 }}}
 Параметры POST:
 {{{
-actual=1500.0
+value=1500.0
+}}}
+или
+{{{
+date=2009-05-20
 }}}

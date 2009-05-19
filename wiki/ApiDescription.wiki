@@ -100,7 +100,7 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
 Доступные действия: GET <br>
 Результат: 
 {{{
-<execution begin="2009-05-18" weekRemaining="1250.0" currentRemaining="950.0">
+<execution begin="2009-05-18" remaining="950.0"> <!-- Текущий остаток, не зависит от начала недели -->
   <!-- Планируемая и фактическая дата зачисления -->
   <actualGoalCredit actualDate="2009-05-22" plannedDate="2009-05-20">
     <goal id="234234" name="(Первоначальный взнос) Авто"/>

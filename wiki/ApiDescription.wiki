@@ -43,11 +43,8 @@ URL: /data/{user} <br>
 Результат: 
 {{{
 <user>
-  <country>Великобритания</country>
-  <currencyLongName>фунт стерлингов</currencyLongName>
-  <currency>фунт</currency>
-  <countryCode>gb</country>
-  <currencyCode>GBP</currencyCode>
+  <country code="gb">Великобритания</country>
+  <currency code="GBP">фунт</currency>
   <firstDayOfWeek>1</firstDayOfWeek> <!-- 0 - sunday, 1 - monday -->
   <timeZone>Europe/London</timeZone>
 
@@ -103,22 +100,30 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
 <execution begin="2009-05-18" remaining="950.0"> <!-- Текущий остаток, не зависит от начала недели -->
   <!-- Планируемая и фактическая дата зачисления -->
   <actualGoalCredit actualDate="2009-05-22" plannedDate="2009-05-20">
-    <goal id="234234" name="(Первоначальный взнос) Авто"/>
+    <goal id="234234" name="(Первоначальный взнос) Авто">
+      <currency code="USD">дол</currency>
+    </goal>
     <planned>1000.0</planned>
     <actual>950.0</actual>
   </actualGoalCredit>
   <actualGoalCredit actualDate="2009-05-23" plannedDate="2009-05-01">
-    <goal id="234234" name="(Другое) Шкаф"/>
+    <goal id="234234" name="(Другое) Шкаф">
+      <currency code="RUR">руб</currency>
+    </goal>
     <planned>1000.0</planned>
     <actual></actual> <!-- Сумма еще не внесена -->
   </actualGoalCredit>
   <actualIncome actualDate="2009-05-18" plannedDate="20095-05-18">
-    <income id="3341123" name="Зарплата"/>
+    <income id="3341123" name="Зарплата">
+      <currency code="RUR">руб</currency>
+    </income>
     <planned>16000.0</planned>
     <actual>15500.0</actual>
   </actualIncome>
   <actualExpense actualDate="2009-05-18" plannedDate="20095-05-18">
-    <expense id="44324553" name="Арендная плата"/>
+    <expense id="44324553" name="Арендная плата">
+      <currency code="RUR">руб</currency>
+    </expense>
     <planned>3000</planned>
     <actual></actual>
   </actualExpense>
@@ -135,7 +140,9 @@ URL: /data/{user}/actualGoalCredit/{goalId}/{plannedDate} <br>
 Результат: 
 {{{
 <actualGoalCredit actualDate="2009-05-22" plannedDate="2009-05-20">
-  <goal id="234234" name="(Первоначальный взнос) Авто"/>
+  <goal id="234234" name="(Первоначальный взнос) Авто">
+    <currency code="USD">дол</currency>
+  </goal>
   <planned>1000.0</planned>
   <actual>950.0</actual>
 </actualGoalCredit>
@@ -151,7 +158,9 @@ URL: /data/{user}/actualIncome/{incomeId}/{plannedDate} <br>
 Результат: 
 {{{
 <actualIncome actualDate="2009-05-18" plannedDate="20095-05-18">
-  <income id="3341123" name="Зарплата"/>
+  <income id="3341123" name="Зарплата">
+    <currency code="RUR">руб</currency>
+  </income>
   <planned>16000.0</planned>
   <actual>15500.0</actual>
 </actualIncome>
@@ -167,7 +176,9 @@ URL: /data/{user}/actualExpense/{expenseId}/{plannedDate} <br>
 Результат: 
 {{{
 <actualExpense actualDate="2009-05-18" plannedDate="20095-05-18">
-  <expense id="44324553" name="Арендная плата"/>
+  <expense id="44324553" name="Арендная плата">
+    <currency code="RUR">руб</currency>
+  </expense>
   <planned>3000</planned>
   <actual></actual>
 </actualExpense>

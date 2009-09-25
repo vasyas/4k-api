@@ -51,6 +51,7 @@ URL: /data/{user} <br>
   <currency code="GBP">фунт</currency>
   <firstDayOfWeek>1</firstDayOfWeek> <!-- 0 - sunday, 1 - monday -->
   <timeZone>Europe/London</timeZone>
+  <disableExtendedSyntax>true<disableExtendedSyntax> <!-- Отключить обработку слова "по" в описании тратах -->
 
   <persons>
     <person id="23443234" name="Петя"/>

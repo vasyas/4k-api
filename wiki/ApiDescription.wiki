@@ -8,6 +8,8 @@ API сервиса www.4konverta.com построено на основе при
 
 В общем, в ответе на POST и GET запросы возвращается документ в формате XML. Данные на сервер передаются в виде параметров в POST-запросах. Тело POST-запроса при этом пустое.
 
+При необходимости, некоторые символы в XML могут быть заменены на XML-сущности для квотирования (например, `<`actualExpression`>`12 пиво &quot;Янтарь&quot;`<`/actualExpression`>`)
+
 Считается, что все входные данные синтаксически верные. В случае ошибки сервер возвращает код статуса 500, тело ответа при этом неопределенное.
 
 Комментарии и вопрос писать в форуме "4-х конвертов" по адресу
@@ -107,6 +109,7 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
     </income>
     <planned>16000.0</planned>
     <actual>15500.0</actual>
+    <actualExpression>аванс 8000 + зарплата 7500<actualExpression>
   </actualIncome>
   <actualGoalCredit actualDate="2009-05-22" plannedDate="2009-05-20">
     <goal id="234234" name="(Первоначальный взнос) Авто">
@@ -114,6 +117,7 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
     </goal>
     <planned>1000.0</planned>
     <actual>950.0</actual>
+    <actualExpression>950</actualExpression>
   </actualGoalCredit>
   <actualGoalCredit actualDate="2009-05-23" plannedDate="2009-05-01">
     <goal id="234234" name="(Другое) Шкаф">
@@ -121,6 +125,7 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
     </goal>
     <planned>1000.0</planned>
     <actual></actual> <!-- Сумма еще не внесена -->
+    <actualExpression></actualExpression>
   </actualGoalCredit>
   <actualExpense actualDate="2009-05-18" plannedDate="2009-05-18">
     <expense id="44324553" name="Арендная плата">
@@ -128,6 +133,7 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
     </expense>
     <planned>3000</planned>
     <actual></actual>
+    <actualExpression></actualExpression>
   </actualExpense>
   ...
   <envelope begin="2009-05-18" size="1005.0"> <!-- Такой же, как в п.2.1 -->
@@ -147,6 +153,7 @@ URL: /data/{user}/actualIncome/{incomeId}/{plannedDate} <br>
   </income>
   <planned>16000.0</planned>
   <actual>15500.0</actual>
+  <actualExpression>15500</actualExpression>
 </actualIncome>
 }}}
 Параметры POST:
@@ -169,6 +176,7 @@ URL: /data/{user}/actualGoalCredit/{goalId}/{plannedDate} <br>
   </goal>
   <planned>1000.0</planned>
   <actual>950.0</actual>
+  <actualExpression>500 и еще 450</actualExpression>
 </actualGoalCredit>
 }}}
 Параметры POST:
@@ -192,6 +200,7 @@ URL: /data/{user}/actualExpense/{expenseId}/{plannedDate} <br>
   </expense>
   <planned>3000</planned>
   <actual></actual>
+  <actualExpression></actualExpression>
 </actualExpense>
 }}}
 Параметры POST:

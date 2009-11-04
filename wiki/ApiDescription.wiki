@@ -24,7 +24,9 @@ http://www.4konverta.com/forum/forums/show/10.page
 <br>
 = История =
 
-Текущая ревизия API - *1.0*
+Текущая ревизия API - *1.1*
+
+[http://code.google.com/p/4k-api/source/browse/wiki/ApiDescription.wiki?spec=svn39&r=39  Версия 1.0]
 
 
 <br>

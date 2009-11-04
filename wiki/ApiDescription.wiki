@@ -26,6 +26,8 @@ http://www.4konverta.com/forum/forums/show/10.page
 
 Текущая ревизия API - *1.1*
 
+- Добавлена поддержка счетов
+
 [http://code.google.com/p/4k-api/source/browse/wiki/ApiDescription.wiki?spec=svn39&r=39  Версия 1.0]
 
 
@@ -63,6 +65,14 @@ URL: /data/{user} <br>
     <person id="23443234" name="Петя"/>
     <person>...</person>
   </persons>
+
+  <accounts>
+    <account id="441232" name="Наличка">
+      <currency code="GBP">фунт</currency>
+      <balance>250 фунтов</balance>
+    </account>
+    ...
+  </accounts>
 </user>
 }}}
 
@@ -77,7 +87,9 @@ URL: /data/{user}/envelope/{envelopeBegin} <br>
   ...
   <person id="23443234" name="Петя">
     <dailyExpense date="2009-05-20">
-      <expression>150 кафе, 20 еда</expression> <!-- Если expression - пустой, трата не введена -->
+      <!-- Если нет ни одного expression, трата не введена -->
+      <expression account="441232">150 кафе, 20 еда</expression> <!-- В качестве account может быть любой счет в нац.валюте -->
+      <expression account="21442">30 интернет</expression>
       <sum>170.0</sum>
     </dailyExpense>
     ...
@@ -92,13 +104,15 @@ URL: /data/{user}/dailyExpense/{personId}/{date} <br>
 Результат: 
 {{{
 <dailyExpense date="2009-05-20">
-  <expression>150 кафе, 20 еда</expression> <!-- Если expression - пустой, трата не введена -->
+  <!-- Если нет ни одного expression, трата не введена -->
+  <expression account="441232">150 кафе, 20 еда</expression> 
+  <expression account="21442">30 интернет</expression>
   <sum>170.0</sum>
 </dailyExpense>
 }}}
 Параметры POST (URL-encoded UTF-8): <br>
 {{{
-expression=150%20кафе,%2020%20еда
+expression=150%20кафе,%2020%20еда&account=21442
 }}}
 
 === 3. Выполнение плана (траты, доходы, цели) ===
@@ -115,8 +129,10 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
       <currency code="RUR">руб</currency>
     </income>
     <planned>16000.0</planned>
-    <actual>15500.0</actual>
-    <actualExpression>аванс 8000 + зарплата 7500<actualExpression>
+    <actual>15500.0</actual> <!-- Сумма всех actualExpression -->
+    <!-- Если нет ни одного actualExpression, трата не введена -->
+    <actualExpression account="441232">аванс 8000 + зарплата 7500<actualExpression>
+    <actualExpression account="3323>323</actualExpression>
   </actualIncome>
   <actualGoalCredit actualDate="2009-05-22" plannedDate="2009-05-20">
     <goal id="234234" name="(Первоначальный взнос) Авто">
@@ -124,7 +140,9 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
     </goal>
     <planned>1000.0</planned>
     <actual>950.0</actual>
-    <actualExpression>950</actualExpression>
+    <actualExpression account="441232">950</actualExpression>
+    <actualExpression account="3323">11</actualExpression>
+    <goalAccount id="3323"/> <!-- Счет, куда ложить деньги. Есть значение по умолчанию. Вся сумма ложиться на один счет. Можно ложить на любой счет в соотв.валюте -->
   </actualGoalCredit>
   <actualGoalCredit actualDate="2009-05-23" plannedDate="2009-05-01">
     <goal id="234234" name="(Другое) Шкаф">
@@ -132,7 +150,7 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
     </goal>
     <planned>1000.0</planned>
     <actual></actual> <!-- Сумма еще не внесена -->
-    <actualExpression></actualExpression>
+    <goalAccount id="3323"/>
   </actualGoalCredit>
   <actualExpense actualDate="2009-05-18" plannedDate="2009-05-18">
     <expense id="44324553" name="Арендная плата">
@@ -140,7 +158,6 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
     </expense>
     <planned>3000</planned>
     <actual></actual>
-    <actualExpression></actualExpression>
   </actualExpense>
   ...
   <envelope begin="2009-05-18" size="1005.0"> <!-- Такой же, как в п.2.1 -->
@@ -160,12 +177,12 @@ URL: /data/{user}/actualIncome/{incomeId}/{plannedDate} <br>
   </income>
   <planned>16000.0</planned>
   <actual>15500.0</actual>
-  <actualExpression>15500</actualExpression>
+  <actualExpression account="2212">15500</actualExpression>
 </actualIncome>
 }}}
 Параметры POST:
 {{{
-value=1500.0
+value=1500.0&account=2123
 }}}
 или
 {{{
@@ -183,12 +200,13 @@ URL: /data/{user}/actualGoalCredit/{goalId}/{plannedDate} <br>
   </goal>
   <planned>1000.0</planned>
   <actual>950.0</actual>
-  <actualExpression>500 и еще 450</actualExpression>
+  <actualExpression account="1323">500 и еще 450</actualExpression>
+  <goalAccount id="323"/>
 </actualGoalCredit>
 }}}
 Параметры POST:
 {{{
-value=950.0
+value=950&account=1323&goalAccount=323
 }}}
 или
 {{{
@@ -207,12 +225,11 @@ URL: /data/{user}/actualExpense/{expenseId}/{plannedDate} <br>
   </expense>
   <planned>3000</planned>
   <actual></actual>
-  <actualExpression></actualExpression>
 </actualExpense>
 }}}
 Параметры POST:
 {{{
-value=1500.0
+value=1500.0&account=2123
 }}}
 или
 {{{

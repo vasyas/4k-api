@@ -86,7 +86,7 @@ URL: /data/{user}/envelope/{envelopeBegin} <br>
 <envelope begin="2009-05-18" size="1005.0">
   ...
   <person id="23443234" name="Петя">
-    <dailyExpense date="2009-05-20">
+    <dailyExpense date="2009-05-20" defaultAccount="441232">
       <!-- Если нет ни одного expression, трата не введена -->
       <expression account="441232">150 кафе, 20 еда</expression> <!-- В качестве account может быть любой счет в нац.валюте -->
       <expression account="21442">30 интернет</expression>
@@ -103,7 +103,7 @@ URL: /data/{user}/dailyExpense/{personId}/{date} <br>
 Доступные действия: GET, POST <br>
 Результат: 
 {{{
-<dailyExpense date="2009-05-20">
+<dailyExpense date="2009-05-20" defaultAccount="441232">
   <!-- Если нет ни одного expression, трата не введена -->
   <expression account="441232">150 кафе, 20 еда</expression> 
   <expression account="21442">30 интернет</expression>
@@ -124,7 +124,7 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
 {{{
 <execution begin="2009-05-18" remaining="950.0"> <!-- Текущий остаток, не зависит от начала недели -->
   <!-- Планируемая и фактическая дата получаемого дохода -->
-  <actualIncome actualDate="2009-05-18" plannedDate="2009-05-18">
+  <actualIncome actualDate="2009-05-18" plannedDate="2009-05-18" defaultAccount="441232">
     <income id="3341123" name="Зарплата">
       <currency code="RUR">руб</currency>
     </income>
@@ -134,7 +134,7 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
     <actualExpression account="441232">аванс 8000 + зарплата 7500<actualExpression>
     <actualExpression account="3323>323</actualExpression>
   </actualIncome>
-  <actualGoalCredit actualDate="2009-05-22" plannedDate="2009-05-20">
+  <actualGoalCredit actualDate="2009-05-22" plannedDate="2009-05-20" defaultAccount="441232">
     <goal id="234234" name="(Первоначальный взнос) Авто">
       <currency code="USD">дол</currency>
     </goal>
@@ -144,7 +144,7 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
     <actualExpression account="3323">11</actualExpression>
     <goalAccount id="3323"/> <!-- Счет, куда ложить деньги. Есть значение по умолчанию. Вся сумма ложиться на один счет. Можно ложить на любой счет в соотв.валюте -->
   </actualGoalCredit>
-  <actualGoalCredit actualDate="2009-05-23" plannedDate="2009-05-01">
+  <actualGoalCredit actualDate="2009-05-23" plannedDate="2009-05-01" defaultAccount="441232">
     <goal id="234234" name="(Другое) Шкаф">
       <currency code="RUR">руб</currency>
     </goal>
@@ -152,7 +152,7 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
     <actual></actual> <!-- Сумма еще не внесена -->
     <goalAccount id="3323"/>
   </actualGoalCredit>
-  <actualExpense actualDate="2009-05-18" plannedDate="2009-05-18">
+  <actualExpense actualDate="2009-05-18" plannedDate="2009-05-18" defaultAccount="441232">
     <expense id="44324553" name="Арендная плата">
       <currency code="RUR">руб</currency>
     </expense>
@@ -171,7 +171,7 @@ URL: /data/{user}/actualIncome/{incomeId}/{plannedDate} <br>
 Доступные действия: GET, POST <br>
 Результат: 
 {{{
-<actualIncome actualDate="2009-05-18" plannedDate="2009-05-18">
+<actualIncome actualDate="2009-05-18" plannedDate="2009-05-18" defaultAccount="441232">
   <income id="3341123" name="Зарплата">
     <currency code="RUR">руб</currency>
   </income>
@@ -194,7 +194,7 @@ URL: /data/{user}/actualGoalCredit/{goalId}/{plannedDate} <br>
 Доступные действия: GET, POST <br>
 Результат: 
 {{{
-<actualGoalCredit actualDate="2009-05-22" plannedDate="2009-05-20">
+<actualGoalCredit actualDate="2009-05-22" plannedDate="2009-05-20" defaultAccount="441232">
   <goal id="234234" name="(Первоначальный взнос) Авто">
     <currency code="USD">дол</currency>
   </goal>
@@ -219,7 +219,7 @@ URL: /data/{user}/actualExpense/{expenseId}/{plannedDate} <br>
 Доступные действия: GET, POST <br>
 Результат: 
 {{{
-<actualExpense actualDate="2009-05-18" plannedDate="2009-05-18">
+<actualExpense actualDate="2009-05-18" plannedDate="2009-05-18" defaultAccount="441232">
   <expense id="44324553" name="Арендная плата">
     <currency code="RUR">руб</currency>
   </expense>

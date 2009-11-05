@@ -69,7 +69,7 @@ URL: /data/{user} <br>
   <accounts>
     <account id="441232" name="Наличка">
       <currency code="GBP">фунт</currency>
-      <balance>250 фунтов</balance>
+      <value>250 фунтов</value>
     </account>
     ...
   </accounts>

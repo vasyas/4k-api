@@ -56,7 +56,7 @@ URL: /data/{user} <br>
 {{{
 <user>
   <country code="gb">Великобритания</country>
-  <currency code="GBP">фунт</currency>
+  <currency id="gb" code="GBP">фунт</currency>
   <firstDayOfWeek>1</firstDayOfWeek> <!-- 1 - sunday, 2 - monday -->
   <timeZone>Europe/London</timeZone>
   <disableExtendedSyntax>true<disableExtendedSyntax> <!-- Отключить обработку слова "по" в описании тратах -->
@@ -68,7 +68,7 @@ URL: /data/{user} <br>
 
   <accounts>
     <account id="441232" name="Наличка">
-      <currency code="GBP">фунт</currency>
+      <currency id="gb" code="GBP">фунт</currency>
       <value>250 фунтов</value>
     </account>
     ...
@@ -112,7 +112,7 @@ URL: /data/{user}/dailyExpense/{personId}/{date} <br>
 }}}
 Параметры POST (URL-encoded UTF-8): <br>
 {{{
-expression=150%20кафе,%2020%20еда&account=21442
+expression=150%20кафе,%2020%20еда&account=21442&currency=gb
 }}}
 
 === 3. Выполнение плана (траты, доходы, цели) ===
@@ -126,7 +126,7 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
   <!-- Планируемая и фактическая дата получаемого дохода -->
   <actualIncome actualDate="2009-05-18" plannedDate="2009-05-18" defaultAccount="441232">
     <income id="3341123" name="Зарплата">
-      <currency code="RUR">руб</currency>
+      <currency code="RUR" id="ru">руб</currency>
     </income>
     <planned>16000.0</planned>
     <actual>15500.0</actual> <!-- Сумма всех actualExpression -->
@@ -136,7 +136,7 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
   </actualIncome>
   <actualGoalCredit actualDate="2009-05-22" plannedDate="2009-05-20" defaultAccount="441232">
     <goal id="234234" name="(Первоначальный взнос) Авто">
-      <currency code="USD">дол</currency>
+      <currency code="USD" id="us">дол</currency>
     </goal>
     <planned>1000.0</planned>
     <actual>950.0</actual>
@@ -146,7 +146,7 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
   </actualGoalCredit>
   <actualGoalCredit actualDate="2009-05-23" plannedDate="2009-05-01" defaultAccount="441232">
     <goal id="234234" name="(Другое) Шкаф">
-      <currency code="RUR">руб</currency>
+      <currency code="RUR" id="ru">руб</currency>
     </goal>
     <planned>1000.0</planned>
     <actual></actual> <!-- Сумма еще не внесена -->
@@ -154,7 +154,7 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
   </actualGoalCredit>
   <actualExpense actualDate="2009-05-18" plannedDate="2009-05-18" defaultAccount="441232">
     <expense id="44324553" name="Арендная плата">
-      <currency code="RUR">руб</currency>
+      <currency code="RUR" id="ru">руб</currency>
     </expense>
     <planned>3000</planned>
     <actual></actual>
@@ -173,7 +173,7 @@ URL: /data/{user}/actualIncome/{incomeId}/{plannedDate} <br>
 {{{
 <actualIncome actualDate="2009-05-18" plannedDate="2009-05-18" defaultAccount="441232">
   <income id="3341123" name="Зарплата">
-    <currency code="RUR">руб</currency>
+    <currency code="RUR" id="ru">руб</currency>
   </income>
   <planned>16000.0</planned>
   <actual>15500.0</actual>
@@ -182,7 +182,7 @@ URL: /data/{user}/actualIncome/{incomeId}/{plannedDate} <br>
 }}}
 Параметры POST:
 {{{
-value=1500.0&account=2123
+value=1500.0&account=2123&currency=ru
 }}}
 или
 {{{
@@ -196,7 +196,7 @@ URL: /data/{user}/actualGoalCredit/{goalId}/{plannedDate} <br>
 {{{
 <actualGoalCredit actualDate="2009-05-22" plannedDate="2009-05-20" defaultAccount="441232">
   <goal id="234234" name="(Первоначальный взнос) Авто">
-    <currency code="USD">дол</currency>
+    <currency code="USD" id="us">дол</currency>
   </goal>
   <planned>1000.0</planned>
   <actual>950.0</actual>
@@ -206,7 +206,7 @@ URL: /data/{user}/actualGoalCredit/{goalId}/{plannedDate} <br>
 }}}
 Параметры POST:
 {{{
-value=950&account=1323&goalAccount=323
+value=950&account=1323&goalAccount=323&currency=us
 }}}
 или
 {{{
@@ -221,7 +221,7 @@ URL: /data/{user}/actualExpense/{expenseId}/{plannedDate} <br>
 {{{
 <actualExpense actualDate="2009-05-18" plannedDate="2009-05-18" defaultAccount="441232">
   <expense id="44324553" name="Арендная плата">
-    <currency code="RUR">руб</currency>
+    <currency code="RUR" id="ru">руб</currency>
   </expense>
   <planned>3000</planned>
   <actual></actual>
@@ -229,7 +229,7 @@ URL: /data/{user}/actualExpense/{expenseId}/{plannedDate} <br>
 }}}
 Параметры POST:
 {{{
-value=1500.0&account=2123
+value=1500.0&account=2123&currency=ru
 }}}
 или
 {{{

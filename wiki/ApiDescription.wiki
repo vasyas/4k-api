@@ -89,7 +89,7 @@ URL: /data/{user}/envelope/{envelopeBegin} <br>
     <dailyExpense date="2009-05-20" defaultAccount="441232">
       <!-- Если нет ни одного expression, трата не введена -->
       <expression account="441232">150 кафе, 20 еда</expression> <!-- В качестве account может быть любой счет в нац.валюте -->
-      <expression account="21442">30 интернет</expression>
+      <expression account="21442" currency="gb">30 интернет</expression>
       <sum>170.0</sum>
     </dailyExpense>
     ...
@@ -105,8 +105,8 @@ URL: /data/{user}/dailyExpense/{personId}/{date} <br>
 {{{
 <dailyExpense date="2009-05-20" defaultAccount="441232">
   <!-- Если нет ни одного expression, трата не введена -->
-  <expression account="441232">150 кафе, 20 еда</expression> 
-  <expression account="21442">30 интернет</expression>
+  <expression account="441232" currency="gb">150 кафе, 20 еда</expression> 
+  <expression account="21442" currency="ru">30 интернет</expression>
   <sum>170.0</sum>
 </dailyExpense>
 }}}
@@ -131,8 +131,8 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
     <planned>16000.0</planned>
     <actual>15500.0</actual> <!-- Сумма всех actualExpression -->
     <!-- Если нет ни одного actualExpression, трата не введена -->
-    <actualExpression account="441232">аванс 8000 + зарплата 7500<actualExpression>
-    <actualExpression account="3323>323</actualExpression>
+    <actualExpression account="441232" currency="gb">аванс 8000 + зарплата 7500<actualExpression>
+    <actualExpression account="3323 currency="ru">323</actualExpression>
   </actualIncome>
   <actualGoalCredit actualDate="2009-05-22" plannedDate="2009-05-20" defaultAccount="441232">
     <goal id="234234" name="(Первоначальный взнос) Авто">
@@ -140,8 +140,8 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
     </goal>
     <planned>1000.0</planned>
     <actual>950.0</actual>
-    <actualExpression account="441232">950</actualExpression>
-    <actualExpression account="3323">11</actualExpression>
+    <actualExpression account="441232" currency="gb">950</actualExpression>
+    <actualExpression account="3323" currency="ru">11</actualExpression>
     <goalAccount id="3323"/> <!-- Счет, куда ложить деньги. Есть значение по умолчанию. Вся сумма ложиться на один счет. Можно ложить на любой счет в соотв.валюте -->
   </actualGoalCredit>
   <actualGoalCredit actualDate="2009-05-23" plannedDate="2009-05-01" defaultAccount="441232">
@@ -177,7 +177,7 @@ URL: /data/{user}/actualIncome/{incomeId}/{plannedDate} <br>
   </income>
   <planned>16000.0</planned>
   <actual>15500.0</actual>
-  <actualExpression account="2212">15500</actualExpression>
+  <actualExpression account="2212" currency="ru">15500</actualExpression>
 </actualIncome>
 }}}
 Параметры POST:
@@ -200,7 +200,7 @@ URL: /data/{user}/actualGoalCredit/{goalId}/{plannedDate} <br>
   </goal>
   <planned>1000.0</planned>
   <actual>950.0</actual>
-  <actualExpression account="1323">500 и еще 450</actualExpression>
+  <actualExpression account="1323" currency="ru">500 и еще 450</actualExpression>
   <goalAccount id="323"/>
 </actualGoalCredit>
 }}}

@@ -88,7 +88,7 @@ URL: /data/{user}/envelope/{envelopeBegin} <br>
   <person id="23443234" name="Петя">
     <dailyExpense date="2009-05-20" defaultAccount="441232">
       <!-- Если нет ни одного expression, трата не введена -->
-      <expression account="441232">150 кафе, 20 еда</expression> <!-- В качестве account может быть любой счет в нац.валюте -->
+      <expression account="441232" currency="gb">150 кафе, 20 еда</expression> <!-- В качестве account может быть любой счет в нац.валюте -->
       <expression account="21442" currency="gb">30 интернет</expression>
       <sum>170.0</sum>
     </dailyExpense>

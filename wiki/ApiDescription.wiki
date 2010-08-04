@@ -24,7 +24,12 @@ http://www.4konverta.com/forum/forums/show/10.page
 <br>
 = История =
 
-Текущая ревизия API - *1.1*
+Текущая ревизия API - *1.2*
+
+- Переработан интерфейс в связи с выходом новой версии 4k [тут будет линк на форум с описанием изменений]
+
+[http://code.google.com/p/4k-api/source/browse/wiki/ApiDescription.wiki?spec=svn49&r=49  Версия 1.1]
+
 
 - Добавлена поддержка счетов
 

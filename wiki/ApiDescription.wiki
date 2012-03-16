@@ -14,8 +14,7 @@ API сервиса www.4konverta.com построено на основе при
 http://www.4konverta.com/forum/forums/show/10.page
 
 В описании в фигурных скобках описаны параметры, которые нужно подставлять в адреса. 
-Возможны следующие параметры:
-|| Название || Описание ||
+Пример параметров:
 || user || Логин пользователя ||
 || date || Дата в формате yyyy-MM-dd ||
 || personId || Идентификатор члена семьи, возвращается в /data/{user} ||
@@ -62,7 +61,7 @@ URL: /data/{user} <br>
 {{{
 <user>
   <country code="gb">Великобритания</country>
-  <currency id="gb" code="GBP">фунт</currency>
+  <currency id="gb" code="GBP">фунт</currency> <!-- Основная валюта -->
   <firstDayOfWeek>1</firstDayOfWeek> <!-- 1 - sunday, 2 - monday -->
   <timeZone>Europe/London</timeZone>
   <disableExtendedSyntax>true<disableExtendedSyntax> <!-- Отключить обработку слова "по" в описании тратах -->
@@ -82,6 +81,16 @@ URL: /data/{user} <br>
 </user>
 }}}
 
+*Получение списка доступных валют* <br>
+URL: /data/{user}/currencies <br>
+Доступные действия: GET <br>
+Результат: 
+{{{
+<currencies>
+  <currency id="ru" code="RUB" rate="43.2">фунт</currency>
+</user>
+}}}
+
 *1.2. Управление счетами* <br>
 URL: /data/{user}/account/{accountId} <br>
 Доступные действия: GET,POST,DELETE <br>
@@ -98,7 +107,6 @@ URL: /data/{user}/account/{accountId} <br>
 При создании нового счета нужно передавать в качестве id строку new. При этом вместе с предыдущими доступны такие параметры
 || currency || идентификатор валюты из списка допустимых ||
 || value || начальный баланс в валюте счета. На эту сумму будет увеличен остаток ||
-}}}
 
 === 2. Ежедневные траты из конвертов ===
 

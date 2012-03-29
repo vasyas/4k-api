@@ -26,6 +26,7 @@ http://www.4konverta.com/forum/forums/show/10.page
 Текущая ревизия API - *1.2* (в процессе разработки)
 
 - Добавлено управления счетами (в процессе)
+- Убраны фактические накопления на цель
 
 
 [http://code.google.com/p/4k-api/source/browse/wiki/ApiDescription.wiki?spec=svn49&r=49  Версия 1.1]
@@ -34,6 +35,7 @@ http://www.4konverta.com/forum/forums/show/10.page
 - Добавлена поддержка счетов
 
 [http://code.google.com/p/4k-api/source/browse/wiki/ApiDescription.wiki?spec=svn39&r=39  Версия 1.0]
+
 
 
 <br>
@@ -147,7 +149,7 @@ URL: /data/{user}/dailyExpense/{personId}/{date} <br>
 || account || id счета, 21442 ||
 || currency || идентификатор валюты, gb ||
 
-=== 3. Выполнение плана (траты, доходы, цели) ===
+=== 3. Выполнение плана трат и доходов ===
 
 *3.1. Перечень пунктов для выполнения на выбранной неделе* <br>
 URL: /data/{user}/execution/{envelopeBegin} <br>
@@ -166,24 +168,6 @@ URL: /data/{user}/execution/{envelopeBegin} <br>
     <actualExpression account="441232" currency="gb">аванс 8000 + зарплата 7500<actualExpression>
     <actualExpression account="3323 currency="ru">323</actualExpression>
   </actualIncome>
-  <actualGoalCredit actualDate="2009-05-22" plannedDate="2009-05-20" defaultAccount="441232">
-    <goal id="234234" name="(Первоначальный взнос) Авто">
-      <currency code="USD" id="us">дол</currency>
-    </goal>
-    <planned>1000.0</planned>
-    <actual>950.0</actual>
-    <actualExpression account="441232" currency="gb">950</actualExpression>
-    <actualExpression account="3323" currency="ru">11</actualExpression>
-    <goalAccount id="3323"/> <!-- Счет, куда ложить деньги. Есть значение по умолчанию. Вся сумма ложиться на один счет. Можно ложить на любой счет в соотв.валюте -->
-  </actualGoalCredit>
-  <actualGoalCredit actualDate="2009-05-23" plannedDate="2009-05-01" defaultAccount="441232">
-    <goal id="234234" name="(Другое) Шкаф">
-      <currency code="RUR" id="ru">руб</currency>
-    </goal>
-    <planned>1000.0</planned>
-    <actual></actual> <!-- Сумма еще не внесена -->
-    <goalAccount id="3323"/>
-  </actualGoalCredit>
   <actualExpense actualDate="2009-05-18" plannedDate="2009-05-18" defaultAccount="441232">
     <expense id="44324553" name="Арендная плата">
       <currency code="RUR" id="ru">руб</currency>
@@ -221,32 +205,7 @@ value=1500.0&account=2123&currency=ru
 date=2009-05-20
 }}}
 
-*3.3. Зачисление на цель* <br>
-URL: /data/{user}/actualGoalCredit/{goalId}/{plannedDate} <br>
-Доступные действия: GET, POST <br>
-Результат: 
-{{{
-<actualGoalCredit actualDate="2009-05-22" plannedDate="2009-05-20" defaultAccount="441232">
-  <goal id="234234" name="(Первоначальный взнос) Авто">
-    <currency code="USD" id="us">дол</currency>
-  </goal>
-  <planned>1000.0</planned>
-  <actual>950.0</actual>
-  <actualExpression account="1323" currency="ru">500 и еще 450</actualExpression>
-  <goalAccount id="323"/>
-</actualGoalCredit>
-}}}
-Параметры POST:
-{{{
-value=950&account=1323&goalAccount=323&currency=us
-}}}
-или
-{{{
-date=2009-05-20
-}}}
-
-
-*3.4. Выполнение траты* <br>
+*3.3. Выполнение траты* <br>
 URL: /data/{user}/actualExpense/{expenseId}/{plannedDate} <br>
 Доступные действия: GET, POST <br>
 Результат: 

@@ -150,6 +150,20 @@ URL: /data/{user}/dailyExpense/{personId}/{date} <br>
 || account || id счета, 21442 ||
 || currency || идентификатор валюты, gb ||
 
+*2.3. Распределение остатка недельного конверта* <br>
+URL: /data/{user}/envelopeResult/{envelopeBegin}/ <br>
+Доступные действия: GET, POST <br>
+Результат:
+{{{
+<envelopeResult>
+  <value>150.0</value> <!-- Сколько осталось из указанного конверта, может быть со значком минус -->
+  <distributeTo>remaining</distributeTo> <!-- Куда ложить остаток, м.б. remaining или nextEnvelope -->
+  <distributed>true</distributed> <!-- При ответе пользователе (первом вызове POST) становится false -->
+</envelopeResult>
+}}}
+Параметры POST:
+|| distributeTo || Куда ложить остаток конверта ||
+
 === 3. Выполнение плана трат и доходов ===
 
 *3.1. Перечень пунктов для выполнения на выбранной неделе* <br>

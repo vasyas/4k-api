@@ -76,7 +76,7 @@ URL: /data/{user} <br>
   <accounts>
     <account id="441232" name="Наличка" archived="false">
       <currency id="gb" code="GBP">фунт</currency>
-      <value>250 фунтов</value>
+      <value>250.0</value>
     </account>
     ...
   </accounts>
@@ -100,7 +100,7 @@ URL: /data/{user}/account/{accountId} <br>
 {{{
 <account id="441232" name="Наличка" archived="true">
   <currency id="gb" code="GBP">фунт</currency>
-  <value>250 фунтов</value>
+  <value>250.0</value>
 </account>
 }}}
 Параметры POST:

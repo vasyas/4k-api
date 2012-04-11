@@ -118,7 +118,7 @@ URL: /data/{user}/account/{accountId} <br>
 Суммы, на которые изменяются счета, не зависит одна от другой (это сделано для поддержки обменных курсов). <br> 
 URL: /data/{user}/account-change/{account-change-id} <br>
 Доступные действия: GET,POST,DELETE. <br>
-Редактирования переводом не предусмотрено. <br>
+Редактирование переводов не предусмотрено. <br>
 Результат: 
 {{{
 <accountChange id="3423467" accountId="441232">
@@ -132,9 +132,12 @@ URL: /data/{user}/account-change/{account-change-id} <br>
  </account>
 }}}
 Параметры POST:
-|| accountId || Счет отправителя ||
-|| matchingAccountId || Счет получателя ||
-|| date |
+|| accountId || Счет 1 ||
+|| change || Изменение счета 1 ||
+|| matchingAccountId || Счет 2 ||
+|| matchingChange || Изменения счета 2. Обычно, если change < 0, то matchingChange > 0, и наооборот || 
+|| date || Дата перевода ||
+|| comment || Примечание к переводу ||
 
 === 2. Ежедневные траты из конвертов ===
 

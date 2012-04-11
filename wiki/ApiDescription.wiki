@@ -127,7 +127,7 @@ URL: /data/{user}/account-change/{account-change-id} <br>
   <comment>Снял наличку с депо</comment>
   
   <matchingAccountChange id="544523" accountId="321233"> <!-- Ссылка на изменения счета-корреспондента -->
-    <change>250.0</change> <!-- баланс счета-корреспондента увеличивается на эту величину -->
+    <change>-250.0</change> <!-- баланс счета-корреспондента увеличивается на эту величину -->
   </matchingAccountChange> 
  </account>
 }}}
@@ -138,6 +138,49 @@ URL: /data/{user}/account-change/{account-change-id} <br>
 || matchingChange || Изменения счета 2. Обычно, если change < 0, то matchingChange > 0, и наооборот || 
 || date || Дата перевода ||
 || comment || Примечание к переводу ||
+
+
+*1.3. Работа с целями* <br>
+* Получение списка целей * <br>
+URL: /data/{user}/goals/ <br>
+Доступные действия: GET <br>
+
+* Получение списка категорий целей * <br>
+URL: /data/{user}/goalCategories/ <br>
+Доступные действия: GET <br>
+
+* Управление целью * <br>
+URL: /data/{user}/goal/{goalId} <br>
+Доступные действия: GET, POST, DELETE <br>
+Результат: 
+{{{
+<goal name="Лыжи" category="Отдых" default="false"> <!-- default=true для резервного фонда -->
+  <currency id="gb" code="GBP">фунт</currency>
+  <price>250.0</price> 
+  <created>2009-01-12</created> 
+  <planned>2011-12-01</planned> 
+  
+  <credit>
+    <value>100.0</value>
+    <period>WEEKLY</period>
+  </credit>
+  
+  <accumulated>125.0</accumulated>
+  <withdrawn>100.0</withdrawn> <!-- Сколько средств потрачено из накопленных на цель -->
+</goal>
+}}}
+Параметры POST:
+|| name || Название цели ||
+|| category || Название категории ||
+|| price || Стоимость цели ||
+|| created || Дата начала накопления ||
+|| planned || Планируемая дата достижения ||
+|| creditValue || Размер откладываемой на цель суммы ||
+|| creditPeriod || Периодичность зачисления. Возможные значения NONE,WEEKLY,BIWEEKLY,MONTHLY,BIMONTHLY,QUARTERLY ||
+
+Для новосоздаваемых целей также можно указать
+|| currency || Валюта цели || 
+|| accumulated || Сколько уже накоплено на цель. При создании цели на эту сумму будет уменьшет остаток. ||
 
 === 2. Ежедневные траты из конвертов ===
 

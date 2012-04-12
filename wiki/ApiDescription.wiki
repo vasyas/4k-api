@@ -141,20 +141,28 @@ URL: /data/{user}/account-change/{account-change-id} <br>
 
 
 *1.3. Работа с целями* <br>
-* Получение списка целей * <br>
-URL: /data/{user}/goals/ <br>
-Доступные действия: GET <br>
-
 * Получение списка категорий целей * <br>
 URL: /data/{user}/goalCategories/ <br>
 Доступные действия: GET <br>
+<goalCategories>
+  <goalCategory id="1" bold="true" order="1">Автомобиль</goalCategory>
+</goalCategories>
+
+* Получение списка целей * <br>
+URL: /data/{user}/goals/ <br>
+Доступные действия: GET <br>
+<goals>
+  <goal id="2332" name="Лыжи" category="Отдых" categoryId="1" default="false" archived="false"> <!-- default=true для резервного фонда -->
+    .. <!-- Тело такое же, как и при управлении целью -->
+  </goal>
+</goals>
 
 * Управление целью * <br>
 URL: /data/{user}/goal/{goalId} <br>
 Доступные действия: GET, POST, DELETE <br>
 Результат: 
 {{{
-<goal name="Лыжи" category="Отдых" default="false"> <!-- default=true для резервного фонда -->
+<goal id="2332" name="Лыжи" category="Отдых" categoryId="1" default="false" archived="false"> <!-- default=true для резервного фонда -->
   <currency id="gb" code="GBP">фунт</currency>
   <price>250.0</price> 
   <created>2009-01-12</created> 
@@ -171,7 +179,7 @@ URL: /data/{user}/goal/{goalId} <br>
 }}}
 Параметры POST:
 || name || Название цели ||
-|| category || Название категории ||
+|| categoryId || Id категории цели ||
 || price || Стоимость цели ||
 || created || Дата начала накопления ||
 || planned || Планируемая дата достижения ||
@@ -181,6 +189,80 @@ URL: /data/{user}/goal/{goalId} <br>
 Для новосоздаваемых целей также можно указать
 || currency || Валюта цели || 
 || accumulated || Сколько уже накоплено на цель. При создании цели на эту сумму будет уменьшет остаток. ||
+
+* Перечень списаний с цели *
+URL: /data/{user}/goal/{goalId}/withdrawals
+<goalWithdrawals>
+  <goalWithdrawal id="4313">
+    <goal id="2332" name="Машина" category="Покупка" default="false" archived="false"/>
+    <date>2012-01-15</date>
+    <comment>Аванс за машину</comment>
+    <account id="441232" name="Наличка"/>
+    <value>150000.0</value>
+  </goalWithdrawal>
+</goalWithdrawals>
+
+* Управление списаниями с цели *
+URL: /data/{user}/goalWithdrawal/{goalWithdrawalId}
+Доступные действия: GET, POST, DELETE <br>
+Результат: 
+{{{
+<goalWithdrawal id="4313">
+  <goal id="2332" name="Машина" category="Покупка" default="false"/>
+  <date>2012-01-15</date>
+  <comment>Аванс за машину</comment>
+  <account id="441232" name="Наличка"/>
+  <value>150000.0</value>
+</goalWithdrawal>
+}}}
+Параметры POST:
+|| date || Дата списания ||
+|| comment || Примечание ||
+|| value || Размер списания ||
+
+При создании списания также указывается
+|| goalId || Идентификатор цели ||
+|| accountId || Счет, с которого снимаются деньги ||
+
+* Перечень переносов с цели/на цель *
+URL: /data/{user}/goal/{goalId}/updates <br>
+Доступные действия: GET <br>
+Результат: 
+{{{
+<goalUpdates>
+  <goalUpdate id="213" type="goal">
+    .. <!-- Тело как при управлении переносами  -->
+  </goalUpdate>
+</goalUpdates>
+}}}
+
+* Управление переносами с цели/на цель *
+URL: /data/{user}/goal-update/{goalUpdateId}
+Доступные действия: GET, POST, DELETE <br>
+У переноса может быть один из следующих типов
+|| GoalTransfer || Перенос средств между целями ||
+|| RemainingTransfer || Перенос средств между целью и остатком ||
+|| Update || Начальное задание суммы, накопленной на цель. Создается при выравнивании баланса ||
+Результат: 
+{{{
+<goalUpdate id="213" type="GoalTransfer">
+  <goal id="2332" name="Машина" category="Покупка" default="false"/>
+  <date>2012-05-12</date>
+  <value>150.0</value> <!-- На эту величину увеличиваются накопленные на цель средства -->
+  <comment>Купил машину дешевле, разницу в резервный фонд</comment>
+  
+  <account id="441232" name="Наличка"/> <!-- Только для type = Update -->
+  <matchingGoalUpdate id="223" type=""/> <!-- Только для type = GoalTransfer -->
+</goalUpdate>
+}}}
+Параметры POST:
+|| date || Дата списания ||
+|| value || Размер списания ||
+|| comment || Примечание ||
+
+При создании списания также указывается
+|| goalId || Идентификатор цели, с которой переносяться средства ||
+|| accountId || Счет, с которого снимаются деньги ||
 
 === 2. Ежедневные траты из конвертов ===
 

@@ -144,23 +144,26 @@ URL: /data/{user}/account-change/{account-change-id} <br>
 * Получение списка категорий целей * <br>
 URL: /data/{user}/goalCategories/ <br>
 Доступные действия: GET <br>
+{{{
 <goalCategories>
   <goalCategory id="1" bold="true" order="1">Автомобиль</goalCategory>
 </goalCategories>
+}}}
 
 * Получение списка целей * <br>
 URL: /data/{user}/goals/ <br>
 Доступные действия: GET <br>
+{{{
 <goals>
   <goal id="2332" name="Лыжи" category="Отдых" categoryId="1" default="false" archived="false"> <!-- default=true для резервного фонда -->
     .. <!-- Тело такое же, как и при управлении целью -->
   </goal>
 </goals>
+}}}
 
 * Управление целью * <br>
 URL: /data/{user}/goal/{goalId} <br>
 Доступные действия: GET, POST, DELETE <br>
-Результат: 
 {{{
 <goal id="2332" name="Лыжи" category="Отдых" categoryId="1" default="false" archived="false"> <!-- default=true для резервного фонда -->
   <currency id="gb" code="GBP">фунт</currency>
@@ -192,6 +195,7 @@ URL: /data/{user}/goal/{goalId} <br>
 
 * Перечень списаний с цели *
 URL: /data/{user}/goal/{goalId}/withdrawals
+{{{
 <goalWithdrawals>
   <goalWithdrawal id="4313">
     <goal id="2332" name="Машина" category="Покупка" default="false" archived="false"/>
@@ -201,6 +205,7 @@ URL: /data/{user}/goal/{goalId}/withdrawals
     <value>150000.0</value>
   </goalWithdrawal>
 </goalWithdrawals>
+}}}
 
 * Управление списаниями с цели *
 URL: /data/{user}/goalWithdrawal/{goalWithdrawalId}

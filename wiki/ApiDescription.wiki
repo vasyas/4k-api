@@ -142,7 +142,7 @@ URL: /data/{user}/accountChange/{accountChangeId} <br>
 
 
 *1.3. Работа с целями* <br>
-* Получение списка категорий целей _не реализовано_ * <br>
+* Получение списка категорий целей * <br>
 URL: /data/{user}/goalCategories/ <br>
 Доступные действия: GET <br>
 {{{
@@ -151,7 +151,7 @@ URL: /data/{user}/goalCategories/ <br>
 </goalCategories>
 }}}
 
-* Получение списка целей _не реализовано_ * <br>
+* Получение списка целей * <br>
 URL: /data/{user}/goals/ <br>
 Доступные действия: GET <br>
 {{{
@@ -162,7 +162,7 @@ URL: /data/{user}/goals/ <br>
 </goals>
 }}}
 
-* Управление целью _не реализовано_ * <br>
+* Управление целью * <br>
 URL: /data/{user}/goal/{goalId} <br>
 Доступные действия: GET, POST, DELETE <br>
 {{{

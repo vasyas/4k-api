@@ -241,7 +241,7 @@ URL: /data/{user}/goal/{goalId}/updates <br>
 }}}
 
 * Управление переносами с цели/на цель _не реализовано_ * <br>
-URL: /data/{user}/goal-update/{goalUpdateId} <br>
+URL: /data/{user}/goalUpdate/{goalUpdateId} <br>
 Доступные действия: GET, POST, DELETE <br>
 У переноса может быть один из следующих типов <br>
 || GoalTransfer || Перенос средств между целями ||

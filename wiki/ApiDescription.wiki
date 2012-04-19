@@ -208,7 +208,7 @@ URL: /data/{user}/goal/{goalId}/withdrawals
 </goalWithdrawals>
 }}}
 
-* Управление списаниями с цели _не реализовано_ * <br>
+* Управление списаниями с цели * <br>
 URL: /data/{user}/goalWithdrawal/{goalWithdrawalId}
 Доступные действия: GET, POST, DELETE <br>
 {{{
@@ -229,7 +229,7 @@ URL: /data/{user}/goalWithdrawal/{goalWithdrawalId}
 || goalId || Идентификатор цели ||
 || accountId || Счет, с которого снимаются деньги ||
 
-* Перечень переносов с цели/на цель _не реализовано_ * <br>
+* Перечень переносов с цели/на цель * <br>
 URL: /data/{user}/goal/{goalId}/updates <br>
 Доступные действия: GET <br>
 {{{
@@ -240,7 +240,7 @@ URL: /data/{user}/goal/{goalId}/updates <br>
 </goalUpdates>
 }}}
 
-* Управление переносами с цели/на цель _не реализовано_ * <br>
+* Управление переносами с цели/на цель * <br>
 URL: /data/{user}/goalUpdate/{goalUpdateId} <br>
 Доступные действия: GET, POST, DELETE <br>
 У переноса может быть один из следующих типов <br>
